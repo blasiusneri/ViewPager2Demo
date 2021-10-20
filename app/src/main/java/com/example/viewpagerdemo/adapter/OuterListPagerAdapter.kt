@@ -2,6 +2,7 @@ package com.example.viewpagerdemo.adapter
 
 import androidx.fragment.app.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.viewpagerdemo.constant.Mode
 import com.example.viewpagerdemo.view.ListFragment
 import com.example.viewpagerdemo.view.InnerViewPagerFragment
 
@@ -13,7 +14,7 @@ class OuterListPagerAdapter(fragmentActivity: FragmentActivity) :
   FragmentStateAdapter(fragmentActivity) {
 
   private companion object {
-    const val NUM_PAGES = 4
+    const val NUM_PAGES = 5
   }
 
   override fun getItemCount(): Int {
@@ -24,7 +25,11 @@ class OuterListPagerAdapter(fragmentActivity: FragmentActivity) :
     return if (position == NUM_PAGES - 1) {
       InnerViewPagerFragment.getInstance()
     } else {
-      ListFragment.getInstance(position)
+      if (position == 0 || position == 1) {
+        ListFragment.getInstance(position, Mode.MODE_A)
+      } else {
+        ListFragment.getInstance(position, Mode.MODE_B)
+      }
     }
   }
 }
